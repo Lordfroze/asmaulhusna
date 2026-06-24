@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Welcome = () => {
   return (
@@ -8,9 +9,9 @@ const Welcome = () => {
         Aplikasi untuk belajar dan menghafal 99 Nama Allah (Asmaul Husna).
       </p>
       <button style={styles.button}>
-        <a className="link" style={styles.link} href="/asmaulhusna">
+        <Link className="link" style={styles.link} to="/asmaulhusna">
           Mulai Belajar
-        </a>
+        </Link>
       </button>
     </div>
   );
