@@ -1,15 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Search from "../components/Search";
+import { useLoaderData } from "react-router-dom";
 
 function AsmaulHusna() {
-  const [allPosts, setAllPosts] = useState([]); // state untuk menyimpan semua data asli
-  const [displayedPosts, setDisplayedPosts] = useState([]); // state untuk data yang ditampilkan
-  const [totalPosts, setTotalPosts] = useState(0); // membuat state totalPosts
+  const loaderData = useLoaderData();
+  // console.log(loaderData);
+
+  const [displayedPosts, setDisplayedPosts] = useState(loaderData.data || []);
+  const [totalPosts, setTotalPosts] = useState(loaderData.data?.length || 0);
 
   // membuat function onSearchChange yang menerima value
   const onSearchChange = (value) => {
     const lowercasedValue = value.toLowerCase();
-    const filtered = allPosts.filter(
+    const filtered = (loaderData.data || []).filter(
       (item) =>
         item.latin.toLowerCase().includes(lowercasedValue) ||
         item.indo.toLowerCase().includes(lowercasedValue),
@@ -17,19 +20,6 @@ function AsmaulHusna() {
     setDisplayedPosts(filtered);
     setTotalPosts(filtered.length);
   };
-
-  useEffect(() => {
-    fetch("https://api.myquran.com/v2/husna/semua")
-      .then((response) => response.json())
-      .then((json) => {
-        // Pastikan json.data ada dan merupakan array sebelum di-set
-        if (json && Array.isArray(json.data)) {
-          setAllPosts(json.data);
-          setDisplayedPosts(json.data);
-          setTotalPosts(json.data.length);
-        }
-      });
-  }, []); // jalan sekali
 
   return (
     <>

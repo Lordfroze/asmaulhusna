@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./App.css";
-import AsmaulHusna from "./pages/AsmaulHusna";
 import { GlobalContext } from "./context/index";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routers/index";
